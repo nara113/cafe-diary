@@ -1,0 +1,30 @@
+2022-05-13 22:44:06 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "URLS" not found; SQL statement:
+SELECT original_url
+          FROM urls
+         WHERE url_id = ? [42102-200]
+2022-05-13 22:58:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "URLS" not found; SQL statement:
+SELECT original_url
+          FROM urls
+         WHERE url_id = ? [42102-200]
+2022-05-13 23:02:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "URLS" not found; SQL statement:
+SELECT original_url
+          FROM urls
+         WHERE url_id = ? [42102-200]
+2022-05-13 23:10:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "URLS" not found; SQL statement:
+SELECT original_url
+          FROM urls
+         WHERE url_id = ? [42102-200]
+2022-05-13 23:20:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "URLS" not found; SQL statement:
+SELECT original_url
+          FROM urls
+         WHERE url_id = ? [42102-200]
+2022-05-13 23:20:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "URLS" not found; SQL statement:
+SELECT original_url
+          FROM urls
+         WHERE url_id = ? [42102-200]
