@@ -9,25 +9,29 @@ const DiaryForm = () => {
         location: '',
         area: '',
         isPetAllowed: false,
-        rating: null,
-        review: null,
+        rating: '',
+        review: '',
         image: null
     });
+
+    const [errors, setErrors] = useState();
 
     const handleOnSubmit = (event) => {
         event.preventDefault();
 
         const formData = new FormData();
         for (let key in state) {
+            if (state[key] === null) continue;
             formData.append(key, state[key]);
         }
 
         axios.post("/api/content", formData)
             .then(data => {
-
+                console.log(data)
             })
-            .catch(() => {
-
+            .catch(error => {
+                console.log(error.response.data);
+                setErrors(error.response.data);
             })
     };
 
@@ -69,6 +73,7 @@ const DiaryForm = () => {
                     name="cafeName"
                     onChange={handleInputChange}
                 />
+                {errors?.cafeName && <span className="text-danger">{errors.cafeName}</span>}
             </Form.Group>
             <Form.Group className="mb-3" controlId="location">
                 <Form.Label>위치</Form.Label>
@@ -78,8 +83,9 @@ const DiaryForm = () => {
                     name="location"
                     onChange={handleInputChange}
                 />
+                {errors?.location && <span className="text-danger">{errors.location}</span>}
             </Form.Group>
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-3" controlId="area">
                 <Form.Label>넓이</Form.Label>
                 <div key="inline-radio" className="mb-3">
                     <Form.Check
@@ -87,7 +93,7 @@ const DiaryForm = () => {
                         label="넓음"
                         name="area"
                         type="radio"
-                        value="large"
+                        value="LARGE"
                         onChange={handleInputChange}
                     />
                     <Form.Check
@@ -95,7 +101,7 @@ const DiaryForm = () => {
                         label="보통"
                         name="area"
                         type="radio"
-                        value="medium"
+                        value="MEDIUM"
                         onChange={handleInputChange}
                     />
                     <Form.Check
@@ -103,10 +109,11 @@ const DiaryForm = () => {
                         label="좁음"
                         name="area"
                         type="radio"
-                        value="small"
+                        value="SMALL"
                         onChange={handleInputChange}
                     />
                 </div>
+                {errors?.area && <span className="text-danger">{errors.area}</span>}
             </Form.Group>
             <Form.Group className="mb-3">
                 <Form.Label>애완견 동반 가능 여부</Form.Label>
@@ -116,15 +123,16 @@ const DiaryForm = () => {
                     name="isPetAllowed"
                     onChange={handleCheckBoxChange}
                 />
+                {errors?.isPetAllowed && <span className="text-danger">{errors.isPetAllowed}</span>}
             </Form.Group>
             <Form.Group className="mb-3" controlId="image">
                 <Form.Label>이미지 첨부</Form.Label>
                 <Form.Control
                     type="file"
-                    placeholder="image"
                     name="image"
                     onChange={handleImageChange}
                 />
+                {errors?.image && <span className="text-danger">{errors.image}</span>}
             </Form.Group>
             <Form.Group className="mb-3" controlId="rate">
                 <Form.Label>평점</Form.Label>
@@ -136,10 +144,12 @@ const DiaryForm = () => {
                     <option value="4">4점</option>
                     <option value="5">5점</option>
                 </Form.Select>
+                {errors?.rating && <span className="text-danger">{errors.rating}</span>}
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                 <Form.Label>리뷰</Form.Label>
-                <Form.Control as="textarea" name="review" rows={3} onChange={handleInputChange} />
+                <Form.Control as="textarea" name="review" rows={3} onChange={handleInputChange}/>
+                {errors?.review && <span className="text-danger">{errors.review}</span>}
             </Form.Group>
             <Button variant="primary"
                     onClick={handleOnSubmit}
