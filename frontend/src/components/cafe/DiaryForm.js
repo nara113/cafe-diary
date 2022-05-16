@@ -11,7 +11,7 @@ const DiaryForm = () => {
         isPetAllowed: false,
         rating: '',
         review: '',
-        image: null
+        imageFile: null
     });
 
     const [errors, setErrors] = useState();
@@ -24,6 +24,8 @@ const DiaryForm = () => {
             if (state[key] === null) continue;
             formData.append(key, state[key]);
         }
+
+        console.log(state)
 
         axios.post("/api/content", formData)
             .then(data => {
@@ -125,14 +127,15 @@ const DiaryForm = () => {
                 />
                 {errors?.isPetAllowed && <span className="text-danger">{errors.isPetAllowed}</span>}
             </Form.Group>
-            <Form.Group className="mb-3" controlId="image">
+            <Form.Group className="mb-3" controlId="imageFile">
                 <Form.Label>이미지 첨부</Form.Label>
                 <Form.Control
                     type="file"
-                    name="image"
+                    accept="image/gif, image/jpeg, image/png"
+                    name="imageFile"
                     onChange={handleImageChange}
                 />
-                {errors?.image && <span className="text-danger">{errors.image}</span>}
+                {errors?.imageFile && <span className="text-danger">{errors.imageFile}</span>}
             </Form.Group>
             <Form.Group className="mb-3" controlId="rate">
                 <Form.Label>평점</Form.Label>
