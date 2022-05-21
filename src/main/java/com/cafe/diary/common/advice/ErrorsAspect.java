@@ -18,10 +18,12 @@ import java.util.stream.Collectors;
 @Component
 public class ErrorsAspect {
     @Pointcut("execution(* com.cafe.diary..*Controller.*(..))")
-    private void allController() {
-    }
+    private void allController() {}
 
-    @Around("allController()")
+    @Pointcut("@annotation(com.cafe.diary.common.annotation.BindingResultAop)")
+    private void bindingResultAnnotation() {}
+
+    @Around("bindingResultAnnotation()")
     public Object targetArgs(ProceedingJoinPoint joinPoint) throws Throwable {
         log.info("target : {}", joinPoint.getSignature());
 

@@ -3,7 +3,6 @@ package com.cafe.diary.content.domain;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.apache.ibatis.type.Alias;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,10 +10,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @ToString
-@Getter
-@Setter
-@Alias("contentForm")
+@Getter @Setter
 public class ContentForm {
+    private int contentId;
 
     @NotBlank(message = "카페 이름을 입력해주세요.")
     private String cafeName;

@@ -7,4 +7,4 @@ spring:
 
 
 file:
-  path: /User/diary/image/
+  path: /Users/diary/file

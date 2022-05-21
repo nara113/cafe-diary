@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cafe.diary.content.mapper.UploadFileMapper">
+    <insert id="insert" parameterType="com.cafe.diary.content.domain.UploadFile">
+        INSERT INTO content_file (
+            content_id,
+            file_name,
+            file_size,
+            file_path,
+            cont_type,
+            created_time,
+            del_yn
+        )
+        VALUES (
+            #{contentId},
+            #{fileName},
+            #{fileSize},
+            #{filePath},
+            #{contentType},
+            NOW(),
+            'N'
+        )
+    </insert>
+</mapper>
