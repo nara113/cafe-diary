@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
+import SearchModal from "./SearchModal";
 
 const DiaryForm = () => {
     const [state, setState] = useState({
@@ -15,6 +16,7 @@ const DiaryForm = () => {
     });
 
     const [errors, setErrors] = useState();
+    const [locationModalShow, setLocationModalShow] = useState(false);
 
     const handleOnSubmit = (event) => {
         event.preventDefault();
@@ -79,12 +81,20 @@ const DiaryForm = () => {
             </Form.Group>
             <Form.Group className="mb-3" controlId="location">
                 <Form.Label>위치</Form.Label>
-                <Form.Control
-                    type="text"
-                    placeholder="위치를 입력해주세요."
-                    name="location"
-                    onChange={handleInputChange}
+                <Button variant="primary" onClick={() => setLocationModalShow(true)}>
+                    검색
+                </Button>
+                <SearchModal
+                    show={locationModalShow}
+                    onHide={() => setLocationModalShow(false)}
                 />
+                {/*<Form.Control*/}
+                {/*    type="text"*/}
+                {/*    placeholder="위치를 입력해주세요."*/}
+                {/*    name="location"*/}
+                {/*    onClick={showLocationModal}*/}
+                {/*    readOnly*/}
+                {/*/>*/}
                 {errors?.location && <span className="text-danger">{errors.location}</span>}
             </Form.Group>
             <Form.Group className="mb-3" controlId="area">
