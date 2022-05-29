@@ -2,11 +2,10 @@ import React, {useState} from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import SearchModal from "./SearchModal";
+import SearchModal from "../location/SearchModal";
 
 const DiaryForm = () => {
     const [state, setState] = useState({
-        cafeName: '',
         location: '',
         area: '',
         isPetAllowed: false,
@@ -69,16 +68,6 @@ const DiaryForm = () => {
 
     return (
         <Form>
-            <Form.Group className="mb-3" controlId="cafeName">
-                <Form.Label>카페명</Form.Label>
-                <Form.Control
-                    type="text"
-                    placeholder="카페명을 입력해주세요."
-                    name="cafeName"
-                    onChange={handleInputChange}
-                />
-                {errors?.cafeName && <span className="text-danger">{errors.cafeName}</span>}
-            </Form.Group>
             <Form.Group className="mb-3" controlId="location">
                 <Form.Label>위치</Form.Label>
                 <Button variant="primary" onClick={() => setLocationModalShow(true)}>
@@ -87,14 +76,8 @@ const DiaryForm = () => {
                 <SearchModal
                     show={locationModalShow}
                     onHide={() => setLocationModalShow(false)}
+                    setState={setState}
                 />
-                {/*<Form.Control*/}
-                {/*    type="text"*/}
-                {/*    placeholder="위치를 입력해주세요."*/}
-                {/*    name="location"*/}
-                {/*    onClick={showLocationModal}*/}
-                {/*    readOnly*/}
-                {/*/>*/}
                 {errors?.location && <span className="text-danger">{errors.location}</span>}
             </Form.Group>
             <Form.Group className="mb-3" controlId="area">
