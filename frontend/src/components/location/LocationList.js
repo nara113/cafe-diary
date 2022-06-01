@@ -14,8 +14,8 @@ const LocationList = ({locationList, setSelectedLocation}) => {
             <tbody>
             {locationList.map(location => {
                     return (
-                        <tr onClick={event => selectLocation(event, location)}>
-                            <td><Form.Check type="radio" name="locationRadio" aria-label="radio 1" /></td>
+                        <tr key={location.id} onClick={event => selectLocation(event, location)}>
+                            <td><Form.Check type="radio" name="locationRadio" aria-label="radio 1"/></td>
                             <td>{location.place_name} <br/> {location.road_address_name}</td>
                         </tr>
                     )

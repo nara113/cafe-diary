@@ -7,6 +7,8 @@ import lombok.ToString;
 @ToString
 @Getter
 public class Document {
+    private String id;
+
     @JsonProperty("address_name")
     private String addressName;
 

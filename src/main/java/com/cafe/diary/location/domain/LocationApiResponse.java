@@ -9,4 +9,5 @@ import java.util.List;
 @Getter
 public class LocationApiResponse {
     private List<Document> documents;
+    private Meta meta;
 }

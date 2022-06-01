@@ -19,7 +19,7 @@ const Search = ({setKeyword, search}) => {
                     />
                 </Col>
                 <Col xs="auto">
-                    <Button onClick={search} className="mb-2">
+                    <Button onClick={() => search(1)} className="mb-2">
                         검색
                     </Button>
                 </Col>

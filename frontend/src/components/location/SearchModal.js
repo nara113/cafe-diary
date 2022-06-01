@@ -5,18 +5,21 @@ import Alert from 'react-bootstrap/Alert'
 import Search from "./Search";
 import LocationList from "./LocationList";
 import axios from "axios";
+import Page from "./Page";
 
 const SearchModal = ({show, onHide, setState}) => {
+    const [meta, setMeta] = useState();
     const [locationList, setLocationList] = useState();
     const [selectedLocation, setSelectedLocation] = useState();
     const [alertShow, setAlertShow] = useState(false);
     const [keyword, setKeyword] = useState();
 
-    const search = () => {
-        axios.get(`/api/location/${keyword}`)
+    const search = (page) => {
+        axios.get(`/api/location/${keyword}?page=${page}`)
             .then(data => {
-                console.log(data.data.documents)
+                console.log(data.data)
 
+                setMeta(data.data.meta);
                 setLocationList(data.data.documents);
             })
             .catch(error => {
@@ -45,6 +48,7 @@ const SearchModal = ({show, onHide, setState}) => {
             onHide={onHide}
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
+            backdrop="static"
             centered
         >
             <Modal.Header closeButton>
@@ -62,6 +66,7 @@ const SearchModal = ({show, onHide, setState}) => {
                 }
                 {locationList && <LocationList locationList={locationList}
                                                setSelectedLocation={setSelectedLocation}/>}
+                {locationList && meta && <Page search={search} meta={meta}/>}
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="primary" onClick={saveLocation}>저장</Button>

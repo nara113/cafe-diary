@@ -73,11 +73,14 @@ const DiaryForm = () => {
                 <Button variant="primary" onClick={() => setLocationModalShow(true)}>
                     검색
                 </Button>
-                <SearchModal
-                    show={locationModalShow}
-                    onHide={() => setLocationModalShow(false)}
-                    setState={setState}
-                />
+                {
+                    locationModalShow &&
+                    <SearchModal
+                        show={locationModalShow}
+                        onHide={() => setLocationModalShow(false)}
+                        setState={setState}
+                    />
+                }
                 {errors?.location && <span className="text-danger">{errors.location}</span>}
             </Form.Group>
             <Form.Group className="mb-3" controlId="area">

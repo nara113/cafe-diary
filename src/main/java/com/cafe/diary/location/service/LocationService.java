@@ -4,8 +4,10 @@ import com.cafe.diary.location.domain.LocationApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
 @Service
@@ -19,11 +21,12 @@ public class LocationService {
     @Value("${kakao.rest-api-key}")
     private String restApiKey;
 
-    public LocationApiResponse getLocation(String query) {
+    public LocationApiResponse getLocation(String query, Integer page) {
         return webClient.get()
-                .uri(locationUrl, query)
+                .uri(locationUrl, page, query)
                 .header(HttpHeaders.AUTHORIZATION, restApiKey)
                 .retrieve()
+                .onStatus(HttpStatus::isError, response -> Mono.error(new IllegalStateException("location api request failed")))
                 .bodyToMono(LocationApiResponse.class)
                 .block();
     }
